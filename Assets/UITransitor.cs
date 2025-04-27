@@ -27,11 +27,7 @@ public class UITransitor : MonoBehaviour
         brandPanel.SetActive(true);
     }
 
-    public void OpenMainPanel()
-    {
-        brandPanel.SetActive(false );
-        mainPanel.SetActive(true); 
-    }
+    
 
     public void ToggleDetailView()
     {
@@ -67,11 +63,7 @@ public class UITransitor : MonoBehaviour
         partContentPanel.SetActive(false);
     }
 
-    public void openPartContentPanel()
-    {
-        mapMenuPanel.SetActive(false);
-        partContentPanel.SetActive(true);
-    }
+    
 
     public void openMenuPanel()
     {
