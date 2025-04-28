@@ -40,11 +40,10 @@ public class Transition : MonoBehaviour
     void ChangeSphereMaterial(int index)
     {
         string materialName = partData[index].partImageFileName.Replace(".jpg", "");
-        materialName = materialName + ".mat";
+        //materialName = materialName + ".mat";
 
         Debug.Log($"load material : {partData[index].partNumber} {materialName} {partData[index].partImageFileName} {partData[index].linkImageFileName}");
-        Material newMaterial = AssetDatabase.LoadAssetAtPath<Material>($"Assets/360images/Materials/{materialName}");
-
+        Material newMaterial = Resources.Load<Material>($"360images/Materials/{materialName}");
         if (newMaterial == null)
         {
             Debug.LogError("Material not found at: " + materialName);
