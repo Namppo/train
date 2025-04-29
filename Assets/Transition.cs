@@ -2,8 +2,6 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using System;
-using UnityEditor;
 
 public class Transition : MonoBehaviour
 {

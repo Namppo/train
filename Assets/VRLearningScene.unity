@@ -4117,6 +4117,7 @@ GameObject:
   - component: {fileID: 193676532}
   - component: {fileID: 193676531}
   - component: {fileID: 193676534}
+  - component: {fileID: 193676535}
   m_Layer: 5
   m_Name: ZoomInButton
   m_TagString: Untagged
@@ -4270,6 +4271,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &193676535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193676529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 193676532}
+  hoverSprite: {fileID: 21300000, guid: e992e47c8d729034dbb3956444d5b24c, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 44261379c9326274b8d3e0e14b6a20ac, type: 3}
 --- !u!1 &197742487
 GameObject:
   m_ObjectHideFlags: 0
@@ -10804,6 +10820,7 @@ GameObject:
   - component: {fileID: 576843318}
   - component: {fileID: 576843317}
   - component: {fileID: 576843320}
+  - component: {fileID: 576843321}
   m_Layer: 5
   m_Name: LeftButton
   m_TagString: Untagged
@@ -10957,6 +10974,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &576843321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 576843315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 576843318}
+  hoverSprite: {fileID: 21300000, guid: 749fab67b8a1e8f449847f3d9b85c215, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 04a30e4d45ef79241bdf85d9ed1ca920, type: 3}
 --- !u!1 &578009914
 GameObject:
   m_ObjectHideFlags: 0
@@ -27464,6 +27496,7 @@ GameObject:
   - component: {fileID: 1561046966}
   - component: {fileID: 1561046965}
   - component: {fileID: 1561046968}
+  - component: {fileID: 1561046969}
   m_Layer: 5
   m_Name: ZoomOutButton
   m_TagString: Untagged
@@ -27617,6 +27650,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1561046969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561046963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 1561046966}
+  hoverSprite: {fileID: 21300000, guid: f096e767966ce9c448a6afb13e0211db, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 2e42b218d0041a54c8ce9282ddad6d95, type: 3}
 --- !u!1 &1562290900
 GameObject:
   m_ObjectHideFlags: 0
@@ -28553,6 +28601,7 @@ GameObject:
   - component: {fileID: 1636137381}
   - component: {fileID: 1636137380}
   - component: {fileID: 1636137383}
+  - component: {fileID: 1636137384}
   m_Layer: 5
   m_Name: Rightbutton
   m_TagString: Untagged
@@ -28706,6 +28755,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1636137384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636137378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 1636137381}
+  hoverSprite: {fileID: 21300000, guid: 4d21be945bde51e44815dab402f79c17, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 376bee0c621167740a296124c721f417, type: 3}
 --- !u!1 &1643393402
 GameObject:
   m_ObjectHideFlags: 0
@@ -33340,6 +33404,7 @@ GameObject:
   - component: {fileID: 1990467160}
   - component: {fileID: 1990467159}
   - component: {fileID: 1990467162}
+  - component: {fileID: 1990467163}
   m_Layer: 5
   m_Name: UpButton
   m_TagString: Untagged
@@ -33493,6 +33558,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1990467163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990467157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 1990467160}
+  hoverSprite: {fileID: 21300000, guid: cd562198188000143afe65e6d895176d, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 6dd5bf642d255b84ba582049e87f3c6b, type: 3}
 --- !u!1 &1996002931
 GameObject:
   m_ObjectHideFlags: 0
@@ -34054,6 +34134,7 @@ GameObject:
   - component: {fileID: 2008566978}
   - component: {fileID: 2008566977}
   - component: {fileID: 2008566980}
+  - component: {fileID: 2008566981}
   m_Layer: 5
   m_Name: DownButton
   m_TagString: Untagged
@@ -34207,6 +34288,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2008566981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008566975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e268179d8899074e8e3133a6a49ea2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 2008566978}
+  hoverSprite: {fileID: 21300000, guid: 2a7db412618f90541a8326c63c37c074, type: 3}
+  defaultSprite: {fileID: 21300000, guid: 2c5058fb7679834498609abcb56f0f13, type: 3}
 --- !u!1 &2022869504
 GameObject:
   m_ObjectHideFlags: 0
