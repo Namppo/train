@@ -19,7 +19,7 @@ public class ImageTool : MonoBehaviour
             material.SetTexture("_MainTex", texture);
 
             // 머티리얼 저장
-            AssetDatabase.CreateAsset(material, $"Resources/360Images/Materials/{fileName}.mat");
+            AssetDatabase.CreateAsset(material, $"Assets/Resources/360Images/Materials/{fileName}.mat");
             Debug.Log($"{fileName} Material Created");
         }
 
