@@ -36,6 +36,15 @@ public class CameraContinuousRotation : MonoBehaviour
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch); // 각도 제한
             transform.localRotation = Quaternion.Euler(pitch, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
+
+        if (isZoomingIn)
+        {
+            ZoomIn();
+        }
+        if (isZoomingOut)
+        {
+            ZoomOut();
+        }
     }
 
     public void StartRotateLeft()
@@ -76,5 +85,45 @@ public class CameraContinuousRotation : MonoBehaviour
     public void StopRotateDown()
     {
         isRotatingDown = false;
+    }
+
+    public Camera mainCamera; // 카메라 참조
+    public float zoomSpeed = 10f; // 확대/축소 속도
+    public float minFOV = 15f; // 최소 FOV (최대 확대)
+    public float maxFOV = 90f; // 최대 FOV (최대 축소)
+
+    private bool isZoomingIn = false;
+    private bool isZoomingOut = false;
+
+    public void StartZoomIn()
+    {
+        isZoomingIn = true;
+    }
+
+    public void StopZoomIn()
+    {
+        isZoomingIn = false;
+    }
+
+    public void StartZoomOut()
+    {
+        isZoomingOut = true;
+    }
+
+    public void StopZoomOut()
+    {
+        isZoomingOut = false;
+    }
+
+    void ZoomIn()
+    {
+        mainCamera.fieldOfView -= zoomSpeed * Time.deltaTime;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
+    }
+
+    void ZoomOut()
+    {
+        mainCamera.fieldOfView += zoomSpeed * Time.deltaTime;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, minFOV, maxFOV);
     }
 }
