@@ -5460,7 +5460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &296962677
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15021,8 +15021,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Time Span
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 397e2504b3e585546ab8995fc9e150c8, type: 2}
-  m_sharedMaterial: {fileID: 2412804690204146984, guid: 397e2504b3e585546ab8995fc9e150c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65b0dddd8d224024cabe9cc3a683eeb6, type: 2}
+  m_sharedMaterial: {fileID: 8993350721446851822, guid: 65b0dddd8d224024cabe9cc3a683eeb6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -25562,7 +25562,7 @@ GameObject:
   - component: {fileID: 1392272641}
   - component: {fileID: 1392272640}
   m_Layer: 5
-  m_Name: DetailViewPanel
+  m_Name: PartDetailViewPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35711,8 +35711,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BOU
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 397e2504b3e585546ab8995fc9e150c8, type: 2}
-  m_sharedMaterial: {fileID: 2412804690204146984, guid: 397e2504b3e585546ab8995fc9e150c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65b0dddd8d224024cabe9cc3a683eeb6, type: 2}
+  m_sharedMaterial: {fileID: 8993350721446851822, guid: 65b0dddd8d224024cabe9cc3a683eeb6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
