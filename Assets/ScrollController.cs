@@ -82,7 +82,7 @@ public class ScrollController : MonoBehaviour
         cnt = 0;
 
         // scrollRect의 수평 위치를 0으로 설정 (중앙에 위치)
-        scrollRect.horizontalNormalizedPosition = Mathf.Clamp(0, 0, 1);
+        scrollRect.horizontalNormalizedPosition = Mathf.Clamp(scrollRect.horizontalNormalizedPosition, 0, 1);
 
         // 처음 이미지는 중앙에 배치
         for (int i = 0; i < trainCardsDefault.Length; i++)
