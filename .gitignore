@@ -1,8 +1,14 @@
-.vs/
-.vsconfig
-build/
-Library/
-Logs/
-obj/
-Temp/
-UserSettings/
+# 1) 루트의 모든 파일/폴더 무시
+/*
+
+# 2) .gitignore 파일 자기 자신은 예외
+!/.gitignore
+
+# 3) 예외로 둘 디렉터리들만 언아이그노어
+!/Assets/
+!/Assets/**
+!/Packages/
+!/Packages/**
+!/ProjectSettings/
+!/ProjectSettings/**
+
