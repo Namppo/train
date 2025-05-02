@@ -32,8 +32,13 @@ public class UIEditorTool : MonoBehaviour
         {
             return;
         }
-        gameObject.SetActive(true);
-        Debug.Log($"activated {name}");
+
+        if(gameObject.activeSelf == false)
+        {
+            gameObject.SetActive(true);
+            EditorUtility.SetDirty(gameObject);
+            Debug.Log($"activated {name}");
+        }
     }
     static void DisableUI(string name)
     {
@@ -42,8 +47,13 @@ public class UIEditorTool : MonoBehaviour
         {
             return;
         }
-        gameObject.SetActive(false);
-        Debug.Log($"disabled {name}");
+
+        if (gameObject.activeSelf == true)
+        {
+            gameObject.SetActive(false);
+            EditorUtility.SetDirty(gameObject);
+            Debug.Log($"disabled {name}");
+        }
     }
 
     static GameObject FindObjectByName(string name)
