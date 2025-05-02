@@ -6,9 +6,11 @@ using System.Collections.Generic;
 public class Transition : MonoBehaviour
 {
     public GameObject launcherCanvas;
+
     public GameObject train360;
-    public GameObject mainPanel;
-    public GameObject mapMenuPanel;
+    public GameObject trainPanel;
+    public GameObject trainMenuPanel;
+    public GameObject navigationPanel;
     public GameObject controlPanel;
 
     [SerializeField]
@@ -28,11 +30,23 @@ public class Transition : MonoBehaviour
     }
     public void openTrainPart(int index)
     {
-        mainPanel.SetActive(false);
-        mapMenuPanel.SetActive(false);
+        trainPanel.SetActive(false);
+        navigationPanel.SetActive(false);
         controlPanel.SetActive(true);
 
         ChangeSphereMaterial(index);
+    }
+    public void openNavigationPanel()
+    {
+        trainMenuPanel.SetActive(false);
+        navigationPanel.SetActive(true);
+    }
+    public void closePartContentPanel()
+    {
+        trainPanel.SetActive(true);
+        trainMenuPanel.SetActive(true);
+        navigationPanel.SetActive(false);
+        controlPanel.SetActive(false);
     }
 
     void ChangeSphereMaterial(int index)

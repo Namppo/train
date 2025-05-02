@@ -56,20 +56,9 @@ public class UITransitor : MonoBehaviour
             title.SetActive(true);
         }
     }
-
-    public void closePartContentPanel()
-    {
-        mainPanel.SetActive(true);
-        partContentPanel.SetActive(false);
-    }
-
     
 
-    public void openMenuPanel()
-    {
-        menuCanvas.SetActive(false);
-        mapMenuPanel.SetActive(true);
-    }
+    
 
     public void closeMenuPanel()
     {
