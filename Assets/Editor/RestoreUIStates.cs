@@ -16,11 +16,13 @@ public class UIEditorTool : MonoBehaviour
         DisableUI("Train360");
         ActivateUI("360UICanvas");
 
-        ActivateUI("MainPanel");
-        DisableUI("ControlPanel");
-        DisableUI("NavigationPanel");
+        ActivateUI("TrainPanel");
+        DisableUI("DetailViewPanel");
 
+        DisableUI("ControlPanel");
         DisableUI("PartDetailViewPanel");
+
+        DisableUI("NavigationPanel");
     }
 
     static void ActivateUI(string name)

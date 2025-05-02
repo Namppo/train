@@ -10,6 +10,7 @@ public class Transition : MonoBehaviour
     public GameObject train360;
     public GameObject trainPanel;
     public GameObject trainMenuPanel;
+    
     public GameObject navigationPanel;
     public GameObject controlPanel;
 
