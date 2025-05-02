@@ -12,3 +12,5 @@
 !/ProjectSettings/
 !/ProjectSettings/**
 
+# /Assets/StreamingAssets/ 폴더 전체 무시
+/Assets/StreamingAssets/**
