@@ -2,6 +2,9 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Networking;
+using UnityEngine.Rendering;
+using System.Collections;
 
 public class Transition : MonoBehaviour
 {
@@ -21,7 +24,8 @@ public class Transition : MonoBehaviour
 
     public Button[] naviagionButtons;
 
-    public GameObject sphere; // 구체 오브젝트
+    public GameObject sphere;
+    public Renderer sphereRenderer;
 
 
     public void OpenTrain360()
@@ -52,9 +56,10 @@ public class Transition : MonoBehaviour
 
     void ChangeSphereMaterial(int index)
     {
+        // @nolimitk image와 material을 1:1 매칭해서 material을 교체하는 방식
+        /*
         string materialName = partData[index].partImageFileName.Replace(".jpg", "");
-        //materialName = materialName + ".mat";
-
+        
         Debug.Log($"load material : {partData[index].partNumber} {materialName} {partData[index].partImageFileName} {partData[index].linkImageFileName}");
         Material newMaterial = Resources.Load<Material>($"360images/Materials/{materialName}");
         if (newMaterial == null)
@@ -62,8 +67,33 @@ public class Transition : MonoBehaviour
             Debug.LogError("Material not found at: " + materialName);
             return;
         }
-        sphere.GetComponent<Renderer>().material = newMaterial; // 머터리얼 적용
+        sphere.GetComponent<Renderer>().material = newMaterial;
+        */
+        //
+        // @nolimitk material을 하나로 하고 texture를 변경하는 방식
+        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].partImageFileName;
+        //string path = System.IO.Path.Combine(Application.streamingAssetsPath, partData[index].partImageFileName);
+        StartCoroutine(LoadTextureFromFile(path));
+        //
     }
+
+    IEnumerator LoadTextureFromFile(string path)
+    {
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(path);
+        yield return www.SendWebRequest();
+
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Texture2D texture = DownloadHandlerTexture.GetContent(www);
+            sphere.GetComponent<Renderer>().material.mainTexture = texture;
+            Debug.Log("load texture : " + path);
+        }
+        else
+        {
+            Debug.LogError("Failed to load texture from file: " + path);
+        }
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
