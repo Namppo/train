@@ -60,11 +60,7 @@ public class UITransitor : MonoBehaviour
 
     
 
-    public void closeMenuPanel()
-    {
-        menuCanvas.SetActive(true);
-        mapMenuPanel.SetActive(false);
-    }
+    
 
     private AudioSource audioSource;
 

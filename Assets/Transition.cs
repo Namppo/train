@@ -13,9 +13,16 @@ public class Transition : MonoBehaviour
     public GameObject train360;
     public GameObject trainPanel;
     public GameObject trainMenuPanel;
-    
+    public GameObject trainDetailViewPanel;
+    public GameObject partMapPanel;
+
     public GameObject navigationPanel;
     public GameObject controlPanel;
+
+    public GameObject navigationMenu;
+    public GameObject trainMenu;
+    public GameObject trainTitle;
+    public GameObject partMenu;
 
     [SerializeField]
     TextAsset partImagesCSV;
@@ -25,7 +32,6 @@ public class Transition : MonoBehaviour
     public Button[] naviagionButtons;
 
     public GameObject sphere;
-    public Renderer sphereRenderer;
 
 
     public void OpenTrain360()
@@ -39,12 +45,30 @@ public class Transition : MonoBehaviour
         navigationPanel.SetActive(false);
         controlPanel.SetActive(true);
 
+        navigationMenu.SetActive(false);
+        trainMenu.SetActive(false);
+
         ChangeSphereMaterial(index);
     }
     public void openNavigationPanel()
     {
         trainMenuPanel.SetActive(false);
+        partMapPanel.SetActive(false);
+        controlPanel.SetActive(false);
         navigationPanel.SetActive(true);
+
+        navigationMenu.SetActive(true);
+        trainMenu.SetActive(false) ;
+
+    }
+    public void closeNavigationPanel()
+    {
+        trainMenuPanel.SetActive(true);
+        partMapPanel.SetActive(true);
+        navigationPanel.SetActive(false);
+
+        navigationMenu.SetActive(false);
+        trainMenu.SetActive(true);
     }
     public void closePartContentPanel()
     {
@@ -53,6 +77,20 @@ public class Transition : MonoBehaviour
         navigationPanel.SetActive(false);
         controlPanel.SetActive(false);
     }
+    public void toggleTrainDetailView()
+    {
+        if (trainDetailViewPanel.activeSelf == true)
+        {
+            trainDetailViewPanel.SetActive(false);
+            trainTitle.SetActive(false);
+        }
+        else
+        {
+            trainDetailViewPanel.SetActive(true);
+            trainTitle.SetActive(true);
+        }
+    }
+
 
     void ChangeSphereMaterial(int index)
     {
