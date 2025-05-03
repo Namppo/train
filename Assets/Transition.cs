@@ -18,11 +18,13 @@ public class Transition : MonoBehaviour
 
     public GameObject navigationPanel;
     public GameObject controlPanel;
+    public GameObject partDetailViewPanel;
 
     public GameObject navigationMenu;
     public GameObject trainMenu;
     public GameObject trainTitle;
     public GameObject partMenu;
+    public GameObject partTitle;
 
     [SerializeField]
     TextAsset partImagesCSV;
@@ -48,6 +50,8 @@ public class Transition : MonoBehaviour
         navigationMenu.SetActive(false);
         trainMenu.SetActive(false);
 
+        partMenu.SetActive(true);
+
         ChangeSphereMaterial(index);
     }
     public void openNavigationPanel()
@@ -59,23 +63,36 @@ public class Transition : MonoBehaviour
 
         navigationMenu.SetActive(true);
         trainMenu.SetActive(false) ;
+        partMenu.SetActive(false);
 
     }
     public void closeNavigationPanel()
     {
-        trainMenuPanel.SetActive(true);
-        partMapPanel.SetActive(true);
-        navigationPanel.SetActive(false);
+        if (trainPanel.activeSelf == true)
+        {
+            trainMenuPanel.SetActive(true);
+            trainMenu.SetActive(true);
+            partMapPanel.SetActive(true);
+        }
+        else
+        {
+            partMenu.SetActive(true);
+        }
 
+        navigationPanel.SetActive(false);
         navigationMenu.SetActive(false);
-        trainMenu.SetActive(true);
     }
     public void closePartContentPanel()
     {
         trainPanel.SetActive(true);
         trainMenuPanel.SetActive(true);
-        navigationPanel.SetActive(false);
+        partMapPanel.SetActive(true);
+
         controlPanel.SetActive(false);
+
+        navigationPanel.SetActive(false);
+        trainMenu.SetActive(true);
+        partMenu.SetActive(false);
     }
     public void toggleTrainDetailView()
     {
@@ -88,6 +105,19 @@ public class Transition : MonoBehaviour
         {
             trainDetailViewPanel.SetActive(true);
             trainTitle.SetActive(true);
+        }
+    }
+    public void togglePartDetailView()
+    {
+        if (partDetailViewPanel.activeSelf == true)
+        {
+            partDetailViewPanel.SetActive(false);
+            partTitle.SetActive(false);
+        }
+        else
+        {
+            partDetailViewPanel.SetActive(true);
+            partTitle.SetActive(true);
         }
     }
 

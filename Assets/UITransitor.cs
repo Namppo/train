@@ -29,33 +29,9 @@ public class UITransitor : MonoBehaviour
 
     
 
-    public void ToggleDetailView()
-    {
-        if (detailViewPanel.activeSelf == true)
-        {
-            detailViewPanel.SetActive(false);
-            title.SetActive(false);
-        }
-        else
-        { 
-            detailViewPanel.SetActive(true);
-            title.SetActive(true);
-        }
-    }
+    
 
-    public void TogglePartDetailView()
-    {
-        if (partDetailViewPanel.activeSelf == true)
-        {
-            partDetailViewPanel.SetActive(false);
-            title.SetActive(false);
-        }
-        else
-        {
-            partDetailViewPanel.SetActive(true);
-            title.SetActive(true);
-        }
-    }
+    
     
 
     
