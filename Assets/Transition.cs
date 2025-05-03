@@ -76,6 +76,7 @@ public class Transition : MonoBehaviour
         }
         else
         {
+            controlPanel.SetActive(true);
             partMenu.SetActive(true);
         }
 
