@@ -11,19 +11,17 @@ public class Transition : MonoBehaviour
     public GameObject launcherCanvas;
 
     public GameObject train360;
-    public GameObject trainPanel;
-    public GameObject trainMenuPanel;
-    public GameObject trainDetailViewPanel;
-    public GameObject partMapPanel;
+    GameObject previousPanel;
 
-    public GameObject navigationPanel;
-    public GameObject controlPanel;
+    public GameObject trainPanel;
+    public GameObject trainDetailViewPanel;
+        
+    public GameObject partContentPanel;
     public GameObject partDetailViewPanel;
 
-    public GameObject navigationMenu;
-    public GameObject trainMenu;
+    public GameObject navigationPanel;
+
     public GameObject trainTitle;
-    public GameObject partMenu;
     public GameObject partTitle;
 
     [SerializeField]
@@ -35,7 +33,6 @@ public class Transition : MonoBehaviour
 
     public GameObject sphere;
 
-
     public void OpenTrain360()
     {
         launcherCanvas.SetActive(false);
@@ -44,56 +41,42 @@ public class Transition : MonoBehaviour
     public void openTrainPart(int index)
     {
         trainPanel.SetActive(false);
+        partContentPanel.SetActive(true);
         navigationPanel.SetActive(false);
-        controlPanel.SetActive(true);
-
-        navigationMenu.SetActive(false);
-        trainMenu.SetActive(false);
-
-        partMenu.SetActive(true);
 
         ChangeSphereMaterial(index);
     }
     public void openNavigationPanel()
     {
-        trainMenuPanel.SetActive(false);
-        partMapPanel.SetActive(false);
-        controlPanel.SetActive(false);
+        if( trainPanel.activeSelf == true)
+        {
+            previousPanel = trainPanel;
+            trainPanel.SetActive(false);
+
+            // 임시로 배경에 train이 보이게 한다.
+            navigationPanel.GetComponent<Image>().enabled = true;
+        }
+        else if(partContentPanel.activeSelf == true)
+        {
+            previousPanel = partContentPanel;
+            partContentPanel.SetActive(false);
+        }
+
         navigationPanel.SetActive(true);
-
-        navigationMenu.SetActive(true);
-        trainMenu.SetActive(false) ;
-        partMenu.SetActive(false);
-
     }
     public void closeNavigationPanel()
     {
-        if (trainPanel.activeSelf == true)
-        {
-            trainMenuPanel.SetActive(true);
-            trainMenu.SetActive(true);
-            partMapPanel.SetActive(true);
-        }
-        else
-        {
-            controlPanel.SetActive(true);
-            partMenu.SetActive(true);
-        }
-
         navigationPanel.SetActive(false);
-        navigationMenu.SetActive(false);
+        previousPanel.SetActive(true);
+
+        //임시로 설정한 배경을 제거한다.
+        navigationPanel.GetComponent<Image>().enabled = false;
     }
-    public void closePartContentPanel()
+    public void moveHome()
     {
+        // close part content panel
+        partContentPanel.SetActive(false);
         trainPanel.SetActive(true);
-        trainMenuPanel.SetActive(true);
-        partMapPanel.SetActive(true);
-
-        controlPanel.SetActive(false);
-
-        navigationPanel.SetActive(false);
-        trainMenu.SetActive(true);
-        partMenu.SetActive(false);
     }
     public void toggleTrainDetailView()
     {
@@ -167,6 +150,9 @@ public class Transition : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        previousPanel = trainPanel;
+
+
         partData = CsvLoader< PartData >.LoadData(partImagesCSV);
 
         for (int i = 0; i < naviagionButtons.Length; i++)

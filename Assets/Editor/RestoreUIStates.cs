@@ -23,10 +23,6 @@ public class UIEditorTool : MonoBehaviour
         DisableUI("PartDetailViewPanel");
 
         DisableUI("NavigationPanel");
-
-        ActivateUI("trainMenu");
-        DisableUI("navigationMenu");
-        DisableUI("partMenu");
     }
 
     static void ActivateUI(string name)
