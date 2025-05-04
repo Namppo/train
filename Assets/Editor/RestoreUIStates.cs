@@ -23,6 +23,8 @@ public class UIEditorTool : MonoBehaviour
         DisableUI("PartDetailViewPanel");
 
         DisableUI("NavigationPanel");
+
+        DisableUI("AirflowPanel");
     }
 
     static void ActivateUI(string name)

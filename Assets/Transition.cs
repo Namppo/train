@@ -21,6 +21,8 @@ public class Transition : MonoBehaviour
 
     public GameObject navigationPanel;
 
+    public GameObject airflowPanel;
+
     public GameObject trainTitle;
     public GameObject partTitle;
 
@@ -43,6 +45,7 @@ public class Transition : MonoBehaviour
         trainPanel.SetActive(false);
         partContentPanel.SetActive(true);
         navigationPanel.SetActive(false);
+        navigationPanel.GetComponent<Image>().enabled = false;
 
         ChangeSphereMaterial(index);
     }
@@ -61,6 +64,14 @@ public class Transition : MonoBehaviour
             previousPanel = partContentPanel;
             partContentPanel.SetActive(false);
         }
+        else if (airflowPanel.activeSelf == true)
+        {
+            previousPanel = airflowPanel;
+            airflowPanel.SetActive(false);
+
+            // 임시로 배경에 train이 보이게 한다.
+            navigationPanel.GetComponent<Image>().enabled = true;
+        }
 
         navigationPanel.SetActive(true);
     }
@@ -76,6 +87,9 @@ public class Transition : MonoBehaviour
     {
         // close part content panel
         partContentPanel.SetActive(false);
+        airflowPanel.SetActive(false);
+        airflowPanel.GetComponent<Image>().enabled = false;
+
         trainPanel.SetActive(true);
     }
     public void toggleTrainDetailView()
@@ -105,6 +119,16 @@ public class Transition : MonoBehaviour
         }
     }
 
+    public void openAirflowPanel()
+    {
+        navigationPanel.SetActive(false);
+        //임시로 설정한 배경을 제거한다.
+        navigationPanel.GetComponent<Image>().enabled = false;
+
+        // 임시로 배경에 train이 보이게 한다.
+        airflowPanel.GetComponent<Image>().enabled = true;
+        airflowPanel.SetActive(true);
+    }
 
     void ChangeSphereMaterial(int index)
     {
