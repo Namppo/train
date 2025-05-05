@@ -7,6 +7,8 @@ using TMPro;
 
 public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public GameObject controllerPanel;
+
     public GameObject playButton;
     public GameObject pauseButton;
     public GameObject backwardButton;
@@ -29,7 +31,8 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("OnPointerEnter");
-        if( videoPlayer.isPlaying == true)
+        controllerPanel.SetActive(true);
+        if ( videoPlayer.isPlaying == true)
         {
             pauseButton.SetActive(true);
         }
@@ -42,6 +45,7 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("OnPointerExit");
+        controllerPanel.SetActive(false);
         playButton.SetActive(false);
         pauseButton.SetActive(false);
     }
