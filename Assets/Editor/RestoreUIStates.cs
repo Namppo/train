@@ -15,6 +15,7 @@ public class UIEditorTool : MonoBehaviour
 
         DisableUI("Train360");
         ActivateUI("360UICanvas");
+        DisableUI("WorldUICanvas");
 
         ActivateUI("TrainPanel");
         DisableUI("DetailViewPanel");

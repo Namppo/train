@@ -3,8 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Networking;
-using UnityEngine.Rendering;
 using System.Collections;
+using GameConstants;
+
+namespace GameConstants
+{
+    public class CameraConstants
+    {
+        public static float minFOV = 15f; // 최소 FOV (최대 확대)
+        public static float maxFOV = 130f; // 최대 FOV (최대 축소)
+    }
+};
 
 public class Transition : MonoBehaviour
 {
@@ -15,7 +24,7 @@ public class Transition : MonoBehaviour
 
     public GameObject trainPanel;
     public GameObject trainDetailViewPanel;
-        
+
     public GameObject partContentPanel;
     public GameObject partDetailViewPanel;
 
@@ -37,40 +46,41 @@ public class Transition : MonoBehaviour
     public Canvas worldCanvas;
 
 
-    public void OpenTrain360()
+    public void moveTrain360()
     {
         launcherCanvas.SetActive(false);
         train360.SetActive(true);
+
+        openTrainPanel();
+    }
+    void openTrainPanel()
+    {
+        trainPanel.SetActive(true);
+        LoadTextureAndCamera(12);
     }
     public void openTrainPart(int index)
     {
         trainPanel.SetActive(false);
         partContentPanel.SetActive(true);
         navigationPanel.SetActive(false);
-        navigationPanel.GetComponent<Image>().enabled = false;
+        worldCanvas.gameObject.SetActive(true);
+        //navigationPanel.GetComponent<Image>().enabled = false;
 
-        ChangeSphereMaterial(index);
-
-        mainCamera.transform.rotation = Quaternion.Euler(0f, partData[index].cameraYRotation, 0f);
+        LoadTextureAndCamera(index);
     }
 
-    public void openlinked360Image(int index)
-    {
-        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].linkImageFileName;
-        StartCoroutine(LoadTextureFromFile(path));
-    }
 
     public void openNavigationPanel()
     {
-        if( trainPanel.activeSelf == true)
+        if (trainPanel.activeSelf == true)
         {
             previousPanel = trainPanel;
             trainPanel.SetActive(false);
 
             // 임시로 배경에 train이 보이게 한다.
-            navigationPanel.GetComponent<Image>().enabled = true;
+            //navigationPanel.GetComponent<Image>().enabled = true;
         }
-        else if(partContentPanel.activeSelf == true)
+        else if (partContentPanel.activeSelf == true)
         {
             previousPanel = partContentPanel;
             partContentPanel.SetActive(false);
@@ -81,7 +91,7 @@ public class Transition : MonoBehaviour
             airflowPanel.SetActive(false);
 
             // 임시로 배경에 train이 보이게 한다.
-            navigationPanel.GetComponent<Image>().enabled = true;
+            //navigationPanel.GetComponent<Image>().enabled = true;
         }
 
         navigationPanel.SetActive(true);
@@ -92,16 +102,17 @@ public class Transition : MonoBehaviour
         previousPanel.SetActive(true);
 
         //임시로 설정한 배경을 제거한다.
-        navigationPanel.GetComponent<Image>().enabled = false;
+        //navigationPanel.GetComponent<Image>().enabled = false;
     }
     public void moveHome()
     {
         // close part content panel
         partContentPanel.SetActive(false);
         airflowPanel.SetActive(false);
-        airflowPanel.GetComponent<Image>().enabled = false;
+        //airflowPanel.GetComponent<Image>().enabled = false;
+        worldCanvas.gameObject.SetActive(false);
 
-        trainPanel.SetActive(true);
+        openTrainPanel();
     }
     public void toggleTrainDetailView()
     {
@@ -130,39 +141,57 @@ public class Transition : MonoBehaviour
         }
     }
 
+
+
     public void openAirflowPanel()
     {
         navigationPanel.SetActive(false);
         //임시로 설정한 배경을 제거한다.
-        navigationPanel.GetComponent<Image>().enabled = false;
+        //navigationPanel.GetComponent<Image>().enabled = false;
 
         // 임시로 배경에 train이 보이게 한다.
-        airflowPanel.GetComponent<Image>().enabled = true;
+        //airflowPanel.GetComponent<Image>().enabled = true;
         airflowPanel.SetActive(true);
     }
 
-    void ChangeSphereMaterial(int index)
+    bool partInteraction = false;
+
+    public void togglePartInteraction(int index)
     {
-        // @nolimitk image와 material을 1:1 매칭해서 material을 교체하는 방식
-        /*
-        string materialName = partData[index].partImageFileName.Replace(".jpg", "");
-        
-        Debug.Log($"load material : {partData[index].partNumber} {materialName} {partData[index].partImageFileName} {partData[index].linkImageFileName}");
-        Material newMaterial = Resources.Load<Material>($"360images/Materials/{materialName}");
-        if (newMaterial == null)
+        if (partInteraction == false)
         {
-            Debug.LogError("Material not found at: " + materialName);
-            return;
+            LoadSkyboxInteractionTexture(index);
+            partInteraction = true;
         }
-        sphere.GetComponent<Renderer>().material = newMaterial;
-        */
-        //
-        // @nolimitk material을 하나로 하고 texture를 변경하는 방식
-        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].partImageFileName;
-        //string path = System.IO.Path.Combine(Application.streamingAssetsPath, partData[index].partImageFileName);
-        StartCoroutine(LoadTextureFromFile(path));
-        //
+        else if (partInteraction == true)
+        {
+            LoadSkyboxTexture(index);
+            partInteraction = false;
+        }
     }
+
+    void LoadTextureAndCamera(int index)
+    {
+        LoadSkyboxTexture(index);
+
+        mainCamera.transform.rotation = Quaternion.Euler(0f, partData[index].cameraYRotation, 0f);
+        mainCamera.fieldOfView = partData[index].cameraFieldofView;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView, CameraConstants.minFOV, CameraConstants.maxFOV);
+        Debug.Log($"FoV : {partData[index].cameraFieldofView} to {mainCamera.fieldOfView}");
+    }
+
+    void LoadSkyboxInteractionTexture(int index)
+    {
+        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].linkImageFileName;
+        StartCoroutine(LoadTextureFromFile(path));
+    }
+
+    void LoadSkyboxTexture(int index)
+    {
+        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].partImageFileName;
+        StartCoroutine(LoadTextureFromFile(path));
+    }
+
 
     IEnumerator LoadTextureFromFile(string path)
     {
@@ -222,6 +251,7 @@ public class PartData : CSVData
     public string partImageFileName { get; set; }
     public string linkImageFileName { get; set; }
     public int cameraYRotation { get; set; }
+    public int cameraFieldofView { get; set; }
 
     public override void SetData(string[] data)
     {
@@ -236,7 +266,14 @@ public class PartData : CSVData
         {
             cameraYRotation = 0;
         }
-        
+        if (data[4].Length > 0)
+        {
+            cameraFieldofView = int.Parse(data[4]);
+        }
+        else
+        {
+            cameraFieldofView = 90;
+        }
     }
 }
 
