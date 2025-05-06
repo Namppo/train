@@ -33,6 +33,9 @@ public class Transition : MonoBehaviour
 
     public Button[] naviagionButtons;
 
+    public Camera mainCamera;
+    public Canvas worldCanvas;
+
 
     public void OpenTrain360()
     {
@@ -47,7 +50,16 @@ public class Transition : MonoBehaviour
         navigationPanel.GetComponent<Image>().enabled = false;
 
         ChangeSphereMaterial(index);
+
+        mainCamera.transform.rotation = Quaternion.Euler(0f, partData[index].cameraYRotation, 0f);
     }
+
+    public void openlinked360Image(int index)
+    {
+        string path = Application.streamingAssetsPath + "/360Images/" + partData[index].linkImageFileName;
+        StartCoroutine(LoadTextureFromFile(path));
+    }
+
     public void openNavigationPanel()
     {
         if( trainPanel.activeSelf == true)
@@ -209,12 +221,22 @@ public class PartData : CSVData
     public int partNumber { get; set; }
     public string partImageFileName { get; set; }
     public string linkImageFileName { get; set; }
+    public int cameraYRotation { get; set; }
 
     public override void SetData(string[] data)
     {
         partNumber = int.Parse(data[0]);
         partImageFileName = data[1];
         linkImageFileName = data[2];
+        if(data[3].Length > 0)
+        {
+            cameraYRotation = int.Parse(data[3]);
+        }
+        else
+        {
+            cameraYRotation = 0;
+        }
+        
     }
 }
 
