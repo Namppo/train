@@ -25,18 +25,7 @@ public class UITransitor : MonoBehaviour
         button_click_audio.Play();
         lobbyPanel.SetActive(false);
         brandPanel.SetActive(true);
-    }
-
-    
-
-    
-
-    
-    
-
-    
-
-    
+    }    
 
     private AudioSource audioSource;
 

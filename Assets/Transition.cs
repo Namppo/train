@@ -33,7 +33,6 @@ public class Transition : MonoBehaviour
 
     public Button[] naviagionButtons;
 
-    public GameObject sphere;
 
     public void OpenTrain360()
     {
@@ -155,13 +154,19 @@ public class Transition : MonoBehaviour
 
     IEnumerator LoadTextureFromFile(string path)
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture(path);
+        var parameters = DownloadedTextureParams.Default;
+        parameters.mipmapChain = false;
+
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(path, parameters);
         yield return www.SendWebRequest();
 
         if (www.result == UnityWebRequest.Result.Success)
         {
             Texture2D texture = DownloadHandlerTexture.GetContent(www);
-            sphere.GetComponent<Renderer>().material.mainTexture = texture;
+            
+            RenderSettings.skybox.mainTexture = texture;
+            
+            //sphere.GetComponent<Renderer>().material.mainTexture = texture;
             Debug.Log("load texture : " + path);
         }
         else
