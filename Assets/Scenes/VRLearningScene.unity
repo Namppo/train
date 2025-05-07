@@ -7061,6 +7061,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1319746308, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1680501587, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -7103,6 +7107,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1767192439, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
       propertyPath: m_FOVAxisMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 393207239731357619, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
@@ -7152,6 +7160,30 @@ PrefabInstance:
     - target: {fileID: 1717954561962503726, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763277165867629938, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449787133337329437, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633365042866799530, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895826684305351068, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748500131873809389, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173983156334026967, guid: f1a20e3daf23f4945afb46a33778de88, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12190,9 +12222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de694e4e4f32ed4ebdd80616884cb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
   mainCamera: {fileID: 687139786}
-  zoomSpeed: 10
 --- !u!1 &689035465
 GameObject:
   m_ObjectHideFlags: 0
