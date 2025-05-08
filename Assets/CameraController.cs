@@ -134,7 +134,6 @@ public class CameraController : MonoBehaviour
 
 
 
-    float mouseRotationSpeed = 0.002f;
     float movementThreshold = 5f;
     float minDragDuration = 0.1f; // 최소 드래그 시간 (초)
     private Vector2 lastMousePosition;

@@ -1,10 +1,10 @@
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.Networking;
 using System.Collections;
 using GameConstants;
+using System.IO;
 
 namespace GameConstants
 {
@@ -44,7 +44,7 @@ public class Transition : MonoBehaviour
 
     public Camera mainCamera;
     public Canvas worldCanvas;
-
+    public Button partViewbutton;
 
     public void moveTrain360()
     {
@@ -56,17 +56,31 @@ public class Transition : MonoBehaviour
     void openTrainPanel()
     {
         trainPanel.SetActive(true);
-        LoadTextureAndCamera(12);
+        LoadTextureAndCamera(0);
     }
+
+    private int currentPartIndex = 0;
     public void openTrainPart(int index)
     {
+        // close
         trainPanel.SetActive(false);
-        partContentPanel.SetActive(true);
         navigationPanel.SetActive(false);
-        worldCanvas.gameObject.SetActive(true);
-        //navigationPanel.GetComponent<Image>().enabled = false;
 
-        LoadTextureAndCamera(index);
+        // open
+        currentPartIndex = index;
+        partContentPanel.SetActive(true);
+        worldCanvas.gameObject.SetActive(true);
+       
+        if(partData[currentPartIndex].linkImageFileName != "")
+        {
+            partViewbutton.gameObject.SetActive(true);
+        }
+        else
+        {
+            partViewbutton.gameObject.SetActive(false);
+        }
+        
+        LoadTextureAndCamera(currentPartIndex);
     }
 
 
@@ -76,9 +90,6 @@ public class Transition : MonoBehaviour
         {
             previousPanel = trainPanel;
             trainPanel.SetActive(false);
-
-            // 임시로 배경에 train이 보이게 한다.
-            //navigationPanel.GetComponent<Image>().enabled = true;
         }
         else if (partContentPanel.activeSelf == true)
         {
@@ -89,9 +100,6 @@ public class Transition : MonoBehaviour
         {
             previousPanel = airflowPanel;
             airflowPanel.SetActive(false);
-
-            // 임시로 배경에 train이 보이게 한다.
-            //navigationPanel.GetComponent<Image>().enabled = true;
         }
 
         navigationPanel.SetActive(true);
@@ -100,16 +108,12 @@ public class Transition : MonoBehaviour
     {
         navigationPanel.SetActive(false);
         previousPanel.SetActive(true);
-
-        //임시로 설정한 배경을 제거한다.
-        //navigationPanel.GetComponent<Image>().enabled = false;
     }
     public void moveHome()
     {
         // close part content panel
         partContentPanel.SetActive(false);
         airflowPanel.SetActive(false);
-        //airflowPanel.GetComponent<Image>().enabled = false;
         worldCanvas.gameObject.SetActive(false);
 
         openTrainPanel();
@@ -146,26 +150,22 @@ public class Transition : MonoBehaviour
     public void openAirflowPanel()
     {
         navigationPanel.SetActive(false);
-        //임시로 설정한 배경을 제거한다.
-        //navigationPanel.GetComponent<Image>().enabled = false;
 
-        // 임시로 배경에 train이 보이게 한다.
-        //airflowPanel.GetComponent<Image>().enabled = true;
         airflowPanel.SetActive(true);
     }
 
     bool partInteraction = false;
 
-    public void togglePartInteraction(int index)
+    public void togglePartInteraction()
     {
         if (partInteraction == false)
         {
-            LoadSkyboxInteractionTexture(index);
+            LoadSkyboxInteractionTexture(currentPartIndex);
             partInteraction = true;
         }
         else if (partInteraction == true)
         {
-            LoadSkyboxTexture(index);
+            LoadSkyboxTexture(currentPartIndex);
             partInteraction = false;
         }
     }
@@ -207,7 +207,6 @@ public class Transition : MonoBehaviour
             
             RenderSettings.skybox.mainTexture = texture;
             
-            //sphere.GetComponent<Renderer>().material.mainTexture = texture;
             Debug.Log("load texture : " + path);
         }
         else
@@ -222,13 +221,12 @@ public class Transition : MonoBehaviour
     {
         previousPanel = trainPanel;
 
-
         partData = CsvLoader< PartData >.LoadData(partImagesCSV);
 
         for (int i = 0; i < naviagionButtons.Length; i++)
         {
             //Debug.Log($"part number : {partData[i].partNumber} {partData[i].partImageFileName} {partData[i].linkImageFileName}");
-            int index = i;
+            int index = i + 1;
             naviagionButtons[i].onClick.AddListener(() => openTrainPart(index));
         }
     }
@@ -256,19 +254,23 @@ public class PartData : CSVData
     public override void SetData(string[] data)
     {
         partNumber = int.Parse(data[0]);
-        partImageFileName = data[1];
-        linkImageFileName = data[2];
-        if(data[3].Length > 0)
+        // data[1] category name
+        // data[2] button name
+        partImageFileName = data[3];
+        linkImageFileName = data[4];
+        string content = data[5];
+        if (content.Length > 0)
         {
-            cameraYRotation = int.Parse(data[3]);
+            cameraYRotation = int.Parse(content);
         }
         else
         {
             cameraYRotation = 0;
         }
-        if (data[4].Length > 0)
+        content = data[6];
+        if (content.Length > 0)
         {
-            cameraFieldofView = int.Parse(data[4]);
+            cameraFieldofView = int.Parse(content);
         }
         else
         {
