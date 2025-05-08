@@ -32,6 +32,9 @@ public class ScrollController : MonoBehaviour
 
     int cnt = 0;
 
+    [Header("사운드용")]
+    public AudioClip scrollClickClip;     // ScrollLeft 시 재생할 WAV
+
     // Start 함수에서 ScrollInit 호출
     void Start()
     {        
@@ -136,6 +139,8 @@ public class ScrollController : MonoBehaviour
             }
         }
 
+        AudioSource.PlayClipAtPoint(scrollClickClip, Camera.main.transform.position);
+
         UpdateButtonGraphics();
     }
 
@@ -144,6 +149,8 @@ public class ScrollController : MonoBehaviour
     // 오른쪽으로 스크롤 이동
     public void ScrollRight()
     {
+
+
         Debug.LogWarning("cnt: " + cnt);
 
         // cnt 값이 5보다 클 때는 더 이상 오른쪽으로 못 이동 (하드코딩: 6개 Train이므로 5까지 이동 가능)
@@ -173,6 +180,8 @@ public class ScrollController : MonoBehaviour
                 trainCardsDisabled[i].gameObject.SetActive(true); // 활성화
             }
         }
+
+        AudioSource.PlayClipAtPoint(scrollClickClip, Camera.main.transform.position);
 
         UpdateButtonGraphics();
     }
