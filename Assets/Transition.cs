@@ -56,12 +56,14 @@ public class Transition : MonoBehaviour
 
         openTrainPanel();
 
-       // AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
     }
     void openTrainPanel()
     {
         trainPanel.SetActive(true);
         LoadTextureAndCamera(0);
+
+        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
+
     }
 
     private int currentPartIndex = 0;
@@ -86,6 +88,9 @@ public class Transition : MonoBehaviour
         }
         
         LoadTextureAndCamera(currentPartIndex);
+
+        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
+
     }
 
 
