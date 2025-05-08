@@ -18,6 +18,7 @@ public class UIEditorTool : MonoBehaviour
         DisableUI("WorldUICanvas");
 
         ActivateUI("TrainPanel");
+        DisableUI("PartMapPanel");
         DisableUI("DetailViewPanel");
 
         DisableUI("PartContentPanel");

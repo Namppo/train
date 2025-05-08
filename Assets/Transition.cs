@@ -133,12 +133,12 @@ public class Transition : MonoBehaviour
         if (trainDetailViewPanel.activeSelf == true)
         {
             trainDetailViewPanel.SetActive(false);
-            trainTitle.SetActive(false);
+            //trainTitle.SetActive(false);
         }
         else
         {
             trainDetailViewPanel.SetActive(true);
-            trainTitle.SetActive(true);
+            //trainTitle.SetActive(true);
         }
     }
     public void togglePartDetailView()
