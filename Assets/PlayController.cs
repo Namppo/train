@@ -28,6 +28,9 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private float previousVolume = 0.5f;
 
     public VideoPlayer videoPlayer;
+    public Slider progressSlider;   // Progress Slider 연결 슬롯
+
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("OnPointerEnter");
@@ -111,6 +114,23 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             volumeSlider.value = videoPlayer.GetDirectAudioVolume(0);
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
         }
+
+        // 프로그레스 슬라이더 Seek 바인딩
+        if (progressSlider != null)
+        {
+            progressSlider.minValue = 0f;
+            progressSlider.maxValue = 1f;
+            progressSlider.interactable = true;              // 사용자가 조작 가능
+            progressSlider.onValueChanged.AddListener(OnProgressChanged);
+        }
+
+        // 프로그레스 슬라이더 Seek 바인딩
+        if (progressSlider != null) {
+        progressSlider.minValue = 0f;
+        progressSlider.maxValue = 1f;
+        progressSlider.interactable = true;              // 사용자가 조작 가능
+        progressSlider.onValueChanged.AddListener(OnProgressChanged);
+    }
     }
 
     // Update is called once per frame
@@ -130,6 +150,12 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             string totalStr = string.Format("{0}:{1:D2}", totalTime.Minutes, totalTime.Seconds);
 
             timeText.text = $"{currentStr} / {totalStr}";
+
+            // 2) 슬라이더 진행도 갱신 (0~1 범위)
+            if (progressSlider != null && videoPlayer.length > 0)
+            {
+                progressSlider.value = (float)(videoPlayer.time / videoPlayer.length);
+            }
         }
     }
 
@@ -164,4 +190,15 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             isMuted = true;
         }
     }
+
+    public void OnProgressChanged(float normalized)
+    {
+        float targetTime = normalized * (float)videoPlayer.length;
+        // 사용자가 직접 조정한 경우에만 시간 세팅
+        if (Mathf.Abs((float)videoPlayer.time - targetTime) > 0.1f)
+        {
+            videoPlayer.time = targetTime;
+        }
+    }
+
 }
