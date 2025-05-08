@@ -34,7 +34,7 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("OnPointerEnter");
-        controllerPanel.SetActive(true);
+        //controllerPanel.SetActive(true);
         if ( videoPlayer.isPlaying == true)
         {
             pauseButton.SetActive(true);
@@ -48,7 +48,7 @@ public class PlayController : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("OnPointerExit");
-        controllerPanel.SetActive(false);
+        //controllerPanel.SetActive(false);
         playButton.SetActive(false);
         pauseButton.SetActive(false);
     }
