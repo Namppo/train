@@ -2726,9 +2726,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 336302579}
-        m_TargetAssemblyTypeName: Manual, Assembly-CSharp
-        m_MethodName: openPDF
+      - m_Target: {fileID: 1962264712}
+        m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+        m_MethodName: openPdfFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4486,6 +4486,18 @@ PrefabInstance:
     - target: {fileID: 2216942849964330686, guid: f2c97308f043bfe43b7db61d3f2751c7, type: 3}
       propertyPath: m_SizeDelta.y
       value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311643294328444497, guid: f2c97308f043bfe43b7db61d3f2751c7, type: 3}
+      propertyPath: tabButtons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311643294328444497, guid: f2c97308f043bfe43b7db61d3f2751c7, type: 3}
+      propertyPath: 'tabButtons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2311643294328444497, guid: f2c97308f043bfe43b7db61d3f2751c7, type: 3}
+      propertyPath: 'tabButtons.Array.data[2]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3517187777315908684, guid: f2c97308f043bfe43b7db61d3f2751c7, type: 3}
       propertyPath: m_Pivot.x
@@ -7409,7 +7421,6 @@ GameObject:
   - component: {fileID: 336302576}
   - component: {fileID: 336302578}
   - component: {fileID: 336302577}
-  - component: {fileID: 336302579}
   m_Layer: 5
   m_Name: BOUManualPanel
   m_TagString: Untagged
@@ -7475,18 +7486,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 336302575}
   m_CullTransparentMesh: 1
---- !u!114 &336302579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336302575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62f9b8f17a9044d488dafb6bb4b07119, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &348135789
 GameObject:
   m_ObjectHideFlags: 0
@@ -57168,5 +57167,4 @@ SceneRoots:
   - {fileID: 1249617921}
   - {fileID: 1262784689}
   - {fileID: 747888214}
-  - {fileID: 1292675331}
   - {fileID: 1962264713}
