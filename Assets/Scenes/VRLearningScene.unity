@@ -2690,9 +2690,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 336302579}
-        m_TargetAssemblyTypeName: Manual, Assembly-CSharp
-        m_MethodName: openPDF
+      - m_Target: {fileID: 1962264712}
+        m_TargetAssemblyTypeName: Transition, Assembly-CSharp
+        m_MethodName: openPdfFile
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7623,6 +7623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62f9b8f17a9044d488dafb6bb4b07119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pdfFilePath: 
 --- !u!1 &348135789
 GameObject:
   m_ObjectHideFlags: 0
@@ -34166,7 +34167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1262784686
 MonoBehaviour:
   m_ObjectHideFlags: 0

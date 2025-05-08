@@ -134,8 +134,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    float mouseRotationSpeed = 0.002f;
-    float movementThreshold = 5f;
+    float movementThreshold = 6f;
     float minDragDuration = 0.1f; // 최소 드래그 시간 (초)
     private Vector2 lastMousePosition;
     private float dragStartTime = 0f; // 마우스 클릭 시작 시간
@@ -167,12 +166,15 @@ public class CameraController : MonoBehaviour
             float yaw = -delta.x * Time.deltaTime * 60f;
             float pitchChange = delta.y * Time.deltaTime * 15f;
 
-            if( Mathf.Abs(delta.x) < 1f)
+            float abs_delta_x = Mathf.Abs(delta.x);
+            float abs_delta_y = Mathf.Abs(delta.y);
+
+            if (abs_delta_x < 1f)
             {
                 yaw = 0;
             }
 
-            if (Mathf.Abs(delta.y) < 4f)
+            if (abs_delta_y < 4f)
             {
                 pitchChange = 0;
             }

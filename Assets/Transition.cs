@@ -225,6 +225,22 @@ public class Transition : MonoBehaviour
         }
     }
 
+    public void openPdfFile()
+    {
+        string pdfPathName = Application.streamingAssetsPath + "/pdf/" + partData[currentPartIndex].pdfFileName; 
+        Debug.Log(pdfPathName);
+
+#if UNITY_EDITOR
+        return;
+#endif
+
+#if UNITY_WEBGL
+        PdfBrowser.OpenInBrowser(pdfPathName);
+#else
+        Process.Start(pdfPathName);
+#endif
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -260,6 +276,7 @@ public class PartData : CSVData
     public string linkImageFileName { get; set; }
     public int cameraYRotation { get; set; }
     public int cameraFieldofView { get; set; }
+    public string pdfFileName { get; set; }
 
     public override void SetData(string[] data)
     {
@@ -286,6 +303,7 @@ public class PartData : CSVData
         {
             cameraFieldofView = 90;
         }
+        pdfFileName = data[7];
     }
 }
 
@@ -306,4 +324,10 @@ public class CsvLoader<TCSVData> where TCSVData : CSVData, new()
 
         return data;
     }
+}
+
+public class PdfBrowser
+{
+    [System.Runtime.InteropServices.DllImport("__Internal")]
+    public static extern void OpenInBrowser(string url);
 }
