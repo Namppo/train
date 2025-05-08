@@ -45,6 +45,8 @@ public class Transition : MonoBehaviour
     public Camera mainCamera;
     public Canvas worldCanvas;
 
+    public AudioClip openPanelClip;   
+
 
     public void moveTrain360()
     {
@@ -52,11 +54,15 @@ public class Transition : MonoBehaviour
         train360.SetActive(true);
 
         openTrainPanel();
+
+       // AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
     }
     void openTrainPanel()
     {
         trainPanel.SetActive(true);
         LoadTextureAndCamera(12);
+
+        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
     }
     public void openTrainPart(int index)
     {
@@ -67,6 +73,8 @@ public class Transition : MonoBehaviour
         //navigationPanel.GetComponent<Image>().enabled = false;
 
         LoadTextureAndCamera(index);
+
+        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
     }
 
 
