@@ -22,7 +22,6 @@ public class Transition : MonoBehaviour
 
     public GameObject lobbyCanvas;
     public GameObject platformCanvas;
-    public GameObject worldCanvas;
 
     public GameObject cameraControllerPanel;
 
@@ -40,14 +39,8 @@ public class Transition : MonoBehaviour
 
     public GameObject airflowPanel;
     
-
-
-
-
-
-    public Button partViewbutton;
-
-
+    public GameObject partViewbutton;
+    public GameObject partButton;
 
 
 
@@ -93,20 +86,20 @@ public class Transition : MonoBehaviour
     {
         // close
         navigationPanel.SetActive(false);
+        partButton.SetActive(false);
 
         // open
         currentPartIndex = index;
         cameraControllerPanel.SetActive(true);
         openTopMenu(1);
 
-        worldCanvas.SetActive(true);
         if(partData[currentPartIndex].linkImageFileName != "")
         {
-            partViewbutton.gameObject.SetActive(true);
+            partViewbutton.SetActive(true);
         }
         else
         {
-            partViewbutton.gameObject.SetActive(false);
+            partViewbutton.SetActive(false);
         }
         
         LoadTextureAndCamera(currentPartIndex);
@@ -129,6 +122,7 @@ public class Transition : MonoBehaviour
     {
         platformCanvas.SetActive(true);
         LoadTextureAndCamera(0);
+        partButton.SetActive(true );
 
         platformAudioSource.Play();
     }

@@ -13,8 +13,8 @@ public class UIEditorTool : MonoBehaviour
         ActivateUI("LobbyCanvas");
             ActivateUI("CompanyPanel");
             DisableUI("WarningPanel");
-                
-        ActivateUI("PlatformCanvas");
+
+        DisableUI("PlatformCanvas");
             ActivateUI("CameraControllerPanel");
             ActivateUI("TopMenuPanel");
                 DisableUI("titlePanel");
@@ -22,7 +22,9 @@ public class UIEditorTool : MonoBehaviour
             DisableUI("DetailViewPanel");
             DisableUI("AirflowPanel");
 
-        DisableUI("WorldCanvas");
+        ActivateUI("WorldCanvas");
+            DisableUI("partButton");
+            DisableUI("partInteractionButton");
     }
 
     static void ActivateUI(string name)
