@@ -6,27 +6,23 @@ public class UIEditorTool : MonoBehaviour
     [MenuItem("Tools/Restore UI Panel States")]
     static void RestoreUIStates()
     { 
+        // VR Launcher Scene
         ActivateUI("LauncherCanvas");
-        ActivateUI("LobbyPanel");
         
-        DisableUI("BrandPanel");
-        ActivateUI("companyPanel");
-        DisableUI("warningPanel");
+        // VR Learning Scene
+        ActivateUI("LobbyCanvas");
+            ActivateUI("CompanyPanel");
+            DisableUI("WarningPanel");
+                
+        ActivateUI("PlatformCanvas");
+            ActivateUI("CameraControllerPanel");
+            ActivateUI("TopMenuPanel");
+                DisableUI("titlePanel");
+            DisableUI("NavigationPanel");
+            DisableUI("DetailViewPanel");
+            DisableUI("AirflowPanel");
 
-        DisableUI("Train360");
-        ActivateUI("360UICanvas");
-        DisableUI("WorldUICanvas");
-
-        ActivateUI("TrainPanel");
-        DisableUI("PartMapPanel");
-        DisableUI("DetailViewPanel");
-
-        DisableUI("PartContentPanel");
-        DisableUI("PartDetailViewPanel");
-
-        DisableUI("NavigationPanel");
-
-        DisableUI("AirflowPanel");
+        DisableUI("WorldCanvas");
     }
 
     static void ActivateUI(string name)

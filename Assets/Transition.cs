@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 using System.Collections;
 using GameConstants;
 using System.IO;
+using System;
+using TMPro;
 
 namespace GameConstants
 {
@@ -17,67 +19,87 @@ namespace GameConstants
 
 public class Transition : MonoBehaviour
 {
-    public GameObject launcherCanvas;
 
-    public GameObject train360;
-    GameObject previousPanel;
+    public GameObject lobbyCanvas;
+    public GameObject platformCanvas;
+    public GameObject worldCanvas;
 
-    public GameObject trainPanel;
-    public GameObject trainDetailViewPanel;
+    public GameObject cameraControllerPanel;
 
-    public GameObject partContentPanel;
-    public GameObject partDetailViewPanel;
+    public GameObject topMenuPanel;
+    public GameObject detailViewButton;
+    public GameObject titlePanel;
+    public TextMeshProUGUI titleText;
+
+    public GameObject detailViewPanel;
+    public GameObject trainTabView;
+    public GameObject partTabView;
 
     public GameObject navigationPanel;
+    public Button[] naviagionButtons;
 
     public GameObject airflowPanel;
+    
 
-    public GameObject trainTitle;
-    public GameObject partTitle;
+
+
+
+
+    public Button partViewbutton;
+
+
+
+
+
+    public Camera mainCamera;
+
+
 
     [SerializeField]
     TextAsset partImagesCSV;
 
     List<PartData> partData;
 
-    public Button[] naviagionButtons;
-
-    public Camera mainCamera;
-    public Canvas worldCanvas;
-    public Button partViewbutton;
-
-    public AudioClip openPanelClip;   
+    
+    private AudioSource platformAudioSource;
 
 
-    public void moveTrain360()
+    public void movePlatform()
     {
-        launcherCanvas.SetActive(false);
-        train360.SetActive(true);
-
-        openTrainPanel();
-
-    }
-    void openTrainPanel()
-    {
-        trainPanel.SetActive(true);
-        LoadTextureAndCamera(0);
-
-        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
-
+        lobbyCanvas.SetActive(false);
+        
+        openPlatform();
     }
 
-    private int currentPartIndex = 0;
-    public void openTrainPart(int index)
+    public void moveNavigation()
     {
         // close
-        trainPanel.SetActive(false);
+        cameraControllerPanel.SetActive(false);
+        topMenuPanel.SetActive(false);
+        airflowPanel.SetActive(false);
+
+        navigationPanel.SetActive(true);
+    }
+    public void quitNavigation()
+    {
+        navigationPanel.SetActive(false);
+
+        cameraControllerPanel.SetActive(true);
+        openTopMenu(0);
+    }    
+
+    private int currentPartIndex = 0;
+    public void moveTrainPart(int index)
+    {
+        // close
         navigationPanel.SetActive(false);
 
         // open
         currentPartIndex = index;
-        partContentPanel.SetActive(true);
-        worldCanvas.gameObject.SetActive(true);
-       
+        cameraControllerPanel.SetActive(true);
+        openTopMenu(1);
+
+        worldCanvas.SetActive(true);
         if(partData[currentPartIndex].linkImageFileName != "")
         {
             partViewbutton.gameObject.SetActive(true);
@@ -89,80 +111,81 @@ public class Transition : MonoBehaviour
         
         LoadTextureAndCamera(currentPartIndex);
 
-        AudioSource.PlayClipAtPoint(openPanelClip, Camera.main.transform.position);
-
+        platformAudioSource.Play();
     }
-
-
-    public void openNavigationPanel()
-    {
-        if (trainPanel.activeSelf == true)
-        {
-            previousPanel = trainPanel;
-            trainPanel.SetActive(false);
-        }
-        else if (partContentPanel.activeSelf == true)
-        {
-            previousPanel = partContentPanel;
-            partContentPanel.SetActive(false);
-        }
-        else if (airflowPanel.activeSelf == true)
-        {
-            previousPanel = airflowPanel;
-            airflowPanel.SetActive(false);
-        }
-
-        navigationPanel.SetActive(true);
-    }
-    public void closeNavigationPanel()
+    public void moveAirflowPanel()
     {
         navigationPanel.SetActive(false);
-        previousPanel.SetActive(true);
-    }
-    public void moveHome()
-    {
-        // close part content panel
-        partContentPanel.SetActive(false);
-        airflowPanel.SetActive(false);
-        worldCanvas.gameObject.SetActive(false);
+        cameraControllerPanel.SetActive(false );
 
-        openTrainPanel();
-    }
-    public void toggleTrainDetailView()
-    {
-        if (trainDetailViewPanel.activeSelf == true)
-        {
-            trainDetailViewPanel.SetActive(false);
-            //trainTitle.SetActive(false);
-        }
-        else
-        {
-            trainDetailViewPanel.SetActive(true);
-            //trainTitle.SetActive(true);
-        }
-    }
-    public void togglePartDetailView()
-    {
-        if (partDetailViewPanel.activeSelf == true)
-        {
-            partDetailViewPanel.SetActive(false);
-            partTitle.SetActive(false);
-        }
-        else
-        {
-            partDetailViewPanel.SetActive(true);
-            partTitle.SetActive(true);
-        }
-    }
-
-
-
-    public void openAirflowPanel()
-    {
-        navigationPanel.SetActive(false);
-
+        currentPartIndex = 23;
         airflowPanel.SetActive(true);
+        openTopMenu(2);
     }
+
+    
+
+    void openPlatform()
+    {
+        platformCanvas.SetActive(true);
+        LoadTextureAndCamera(0);
+
+        platformAudioSource.Play();
+    }
+
+    void openTopMenu(int index)
+    {
+        topMenuPanel.SetActive(true);
+        if (index == 0)
+        {
+            detailViewButton.SetActive(true);
+            titlePanel.SetActive(false);
+        }
+        // airflow
+        else if (index == 1)
+        {
+            detailViewButton.SetActive(true);
+            openTitle();
+        }
+        else if (index == 2)
+        {
+            detailViewButton.SetActive(false);
+            openTitle();
+        }
+    }
+    void openTitle()
+    {
+        titlePanel.SetActive(true);
+        titleText.text = partData[currentPartIndex].partTitle;
+    }
+
+    public void toggleDetailView()
+    {
+        if (detailViewPanel.activeSelf == true)
+        {
+            detailViewPanel.SetActive(false);
+        }
+        else
+        {
+            detailViewPanel.SetActive(true);
+            if (currentPartIndex == 0)
+            {
+                partTabView.SetActive(false);
+
+                trainTabView.SetActive(true);
+            }
+            else
+            {
+                trainTabView.SetActive(false);
+
+                partTabView.SetActive(true);
+            }
+        }
+    }
+
+
+
+    
 
     bool partInteraction = false;
 
@@ -245,16 +268,21 @@ public class Transition : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        previousPanel = trainPanel;
-
         partData = CsvLoader< PartData >.LoadData(partImagesCSV);
 
-        for (int i = 0; i < naviagionButtons.Length; i++)
+        // must be naviagionButtons.Length > 22
+        for (int i = 0; i < 22; i++)
         {
             //Debug.Log($"part number : {partData[i].partNumber} {partData[i].partImageFileName} {partData[i].linkImageFileName}");
             int index = i + 1;
-            naviagionButtons[i].onClick.AddListener(() => openTrainPart(index));
+            naviagionButtons[i].onClick.AddListener(() => moveTrainPart(index));
         }
+
+        naviagionButtons[22].onClick.AddListener(() => moveAirflowPanel());
+
+        platformAudioSource = gameObject.AddComponent<AudioSource>();
+        platformAudioSource.clip = Resources.Load<AudioClip>("platform");
+        platformAudioSource.loop = true;
     }
 
     // Update is called once per frame
@@ -272,6 +300,7 @@ public abstract class CSVData
 public class PartData : CSVData
 {
     public int partNumber { get; set; }
+    public string partTitle { get; set; }
     public string partImageFileName { get; set; }
     public string linkImageFileName { get; set; }
     public int cameraYRotation { get; set; }
@@ -282,7 +311,7 @@ public class PartData : CSVData
     {
         partNumber = int.Parse(data[0]);
         // data[1] category name
-        // data[2] button name
+        partTitle = data[2];
         partImageFileName = data[3];
         linkImageFileName = data[4];
         string content = data[5];

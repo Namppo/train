@@ -1,9 +1,7 @@
 using UnityEngine;
 using GameConstants;
-using static UnityEngine.XR.Hands.XRHandSubsystemDescriptor;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CameraController : MonoBehaviour
 {
