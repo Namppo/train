@@ -2,6 +2,8 @@ using UnityEngine;
 using GameConstants;
 using static UnityEngine.XR.Hands.XRHandSubsystemDescriptor;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class CameraController : MonoBehaviour
 {
@@ -48,6 +50,9 @@ public class CameraController : MonoBehaviour
         {
             ZoomOut();
         }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
 
         HandleMouseDrag();
         HandleMouseScroll();
@@ -134,7 +139,7 @@ public class CameraController : MonoBehaviour
 
 
 
-    float movementThreshold = 6f;
+    
     float minDragDuration = 0.1f; // 최소 드래그 시간 (초)
     private Vector2 lastMousePosition;
     private float dragStartTime = 0f; // 마우스 클릭 시작 시간
@@ -159,39 +164,49 @@ public class CameraController : MonoBehaviour
             Vector2 currentMousePosition = Mouse.current.position.ReadValue();
             Vector2 delta = currentMousePosition - lastMousePosition;
 
-            if (delta.magnitude < movementThreshold) return; // 너무 작은 움직임 무시
+            RotateCamera(delta);
 
             lastMousePosition = currentMousePosition;
-
-            float yaw = -delta.x * Time.deltaTime * 60f;
-            float pitchChange = delta.y * Time.deltaTime * 15f;
-
-            float abs_delta_x = Mathf.Abs(delta.x);
-            float abs_delta_y = Mathf.Abs(delta.y);
-
-            if (abs_delta_x < 1f)
-            {
-                yaw = 0;
-            }
-
-            if (abs_delta_y < 4f)
-            {
-                pitchChange = 0;
-            }
-
-            pitch = Mathf.Clamp(pitch + pitchChange, minPitch, maxPitch);
-
-            transform.localRotation = Quaternion.Lerp(
-                transform.localRotation,
-                Quaternion.Euler(pitch, transform.localRotation.eulerAngles.y + yaw, 0f),
-                0.08f
-            );
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             isDragging = false; // 버튼을 떼면 드래그 종료
         }
+    }
+
+    const float MOUSE_DELTA_THRESHOLD = 6f;
+    void RotateCamera(Vector2 mouseDelta)
+    {
+        // 너무 작은 움직임 무시
+        if (mouseDelta.magnitude < MOUSE_DELTA_THRESHOLD)
+        {
+            return;
+        }
+
+        float yawDiff = -mouseDelta.x * Time.deltaTime * 160f;
+        float pitchDiff = mouseDelta.y * Time.deltaTime * 15f;
+
+        float abs_delta_x = Mathf.Abs(mouseDelta.x);
+        float abs_delta_y = Mathf.Abs(mouseDelta.y);
+
+        if (abs_delta_x < 1f)
+        {
+            yawDiff = 0;
+        }
+
+        if (abs_delta_y < 4f)
+        {
+            pitchDiff = 0;
+        }
+
+        pitch = Mathf.Clamp(pitch + pitchDiff, minPitch, maxPitch);
+
+        transform.localRotation = Quaternion.Lerp(
+            transform.localRotation,
+            Quaternion.Euler(pitch, transform.localRotation.eulerAngles.y + yawDiff, 0f),
+            0.08f
+        );
     }
 
 
